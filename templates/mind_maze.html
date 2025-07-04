@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Mind Maze{% endblock %}
+
+{% block content %}
+<!-- Start Screen -->
+<div id="start-screen">
+  <h1>🧠 Welcome to Mind Maze</h1>
+  <input type="text" id="player-name" placeholder="Enter your name" />
+  <br>
+  <button onclick="startGame()">Start Game</button>
+  <br>
+  <button id="open-instructions-btn">How to Play</button>
+  <br>
+  <button onclick="window.location.href='/'" id="back-home-btn">← Back to Home</button>
+</div>
+
+<!-- Game Container -->
+<div id="game-container" style="display: none;">
+  <div class="left-panel">
+    <h2 id="welcome-msg"></h2>
+    <div id="timer">⏳ Time Left: <span id="time">30</span>s</div>
+    <div id="board"></div>
+
+    <div id="controls">
+      <button onclick="resetMaze()">Reset Maze</button>
+      <button id="hintBtn" onclick="showHint()">Show Hint</button>
+    </div>
+  </div>
+
+  <div class="right-panel">
+    <h2>🏆 Top Players</h2>
+    <ul id="scoreboard"></ul>
+  </div>
+</div>
+
+<!-- Instructions Modal -->
+<div id="instructions-modal" class="modal">
+  <div class="modal-content">
+    <span id="close-instructions-btn" class="close">&times;</span>
+    <h2>🧠 How to Play Mind Maze</h2>
+    <ul>
+            <li>🎯 Your goal is to reach the <strong>red end cell</strong> (🟥) before the time runs out.</li>
+            <li>🟩 You start from the top-left green cell.</li>
+            <li>🧱 The maze changes dynamically after every move you make!</li>
+            <li>📍 After every <strong>3 moves</strong>, the end cell (🟥) will <strong>shift</strong> to a random cell in the last row or last column — but never on your position.</li>
+            <li>🧠 The maze gets tougher if you favor one direction — it adapts and adds more walls in your frequent movement path!</li>
+            <li>⌛ You have <strong>30 seconds</strong> to complete the maze.</li>
+            <li>💡 Use the hint button to briefly highlight a possible path.</li>
+            <li>🏆 Complete it faster to reach the Top 5 Leaderboard!</li>
+            <li>🔁 Press <strong>R</strong> to reset the maze anytime during the game.</li>
+            </ul>
+  </div>
+</div>
+
+<!-- Game Over Modal -->
+<div id="game-over-modal" class="modal">
+  <div class="modal-content">
+    <h2 id="game-over-message"></h2>
+    <button onclick="resetMaze()">🔁 Reset Maze</button>
+    <button onclick="startOver()">🔄 Start Over</button>
+  </div>
+</div>
+
+<!-- Swipe direction toast -->
+<div id="swipe-toast">⬆️</div>
+
+<!-- Confetti Canvas -->
+<canvas id="confetti-canvas"></canvas>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script src="/static/script(m).js"></script>
+<script>
+  const modal = document.getElementById('instructions-modal');
+  const openBtn = document.getElementById('open-instructions-btn');
+  const closeBtn = document.getElementById('close-instructions-btn');
+
+  openBtn.addEventListener('click', () => { modal.style.display = 'flex'; });
+  closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
+  window.addEventListener('click', (event) => {
+    if (event.target === modal) modal.style.display = 'none';
+  });
+</script>
+{% endblock %}

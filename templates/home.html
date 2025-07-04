@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block title %}Game Portal | NTCC Project{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+  <h1>🎮 Game Portal</h1>
+  <p class="subtitle">Play, Compete, and Challenge Your Mind!</p>
+  <p class="tagline animated-tagline">
+    ✨ Step into the realm of AI-powered strategy and fun.
+  </p>
+</section>
+
+<!-- Game Cards -->
+<main class="game-grid">
+  <div class="card fade-in">
+    <h2>❌ Ultimate Tic Tac Toe</h2>
+    <p>A strategic twist on the classic game.</p>
+    <div class="actions">
+      <a href="/tic-tac-toe" class="btn">Play Now</a>
+      <button id="open-ttt-instructions" class="btn-outline">Instructions</button>
+    </div>
+  </div>
+
+  <div class="card fade-in">
+    <h2>🧠 Mind Maze</h2>
+    <p>Navigate the maze. Time is running out!</p>
+    <div class="actions">
+      <a href="/mind-maze" class="btn">Play Now</a>
+      <button id="open-mm-instructions" class="btn-outline">Instructions</button>
+    </div>
+  </div>
+</main>
+
+<!-- Modals -->
+<div id="ttt-modal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="close-ttt-modal">&times;</span>
+    <h2>🎮 How to Play Ultimate Tic Tac Toe</h2>
+    <ul>
+      <li>🔲 The board is made up of <strong>9 mini Tic Tac Toe boards</strong> (3x3 grid).</li>
+      <li>❌ You are <strong>Player X</strong>, and you play first. The AI (or 2nd player) is ⭕.</li>
+      <li>➡️ When you play in a mini board, your move decides which board the opponent plays in next.</li>
+      <li>🎯 For example: If you place ❌ in the <strong>top-right cell</strong> of a mini board, your opponent must play in the <strong>top-right board</strong>.</li>
+      <li>🚫 If the target board is already won or full, your opponent can move anywhere.</li>
+      <li>✅ To win a mini board: get 3 in a row (❌ or ⭕).</li>
+      <li>🏆 To win the game: win 3 mini boards in a row (like a giant Tic Tac Toe).</li>
+      <li>🔄 Press <strong>Restart</strong> anytime to reset the game.</li>
+      <li>👥 Use the toggle to switch between:
+        <ul>
+          <li><strong>Player vs AI 🤖</strong> — Challenge the smart computer.</li>
+          <li><strong>2 Player 👥</strong> — Play locally with a friend.</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div id="mindmaze-modal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="close-mm-modal">&times;</span>
+    <h2>🧠 How to Play Mind Maze</h2>
+    <ul>
+      <li>🎯 Your goal is to reach the <strong>red end cell</strong> (🟥) before the time runs out.</li>
+      <li>🟩 You start from the top-left green cell.</li>
+      <li>🧱 The maze changes dynamically after every move you make!</li>
+      <li>📍 After every <strong>3 moves</strong>, the end cell (🟥) will <strong>shift</strong> to a random cell in the last row or last column — but never on your position.</li>
+      <li>🧠 The maze gets tougher if you favor one direction — it adapts and adds more walls in your frequent movement path!</li>
+      <li>⌛ You have <strong>30 seconds</strong> to complete the maze.</li>
+      <li>💡 Use the hint button to briefly highlight a possible path.</li>
+      <li>🏆 Complete it faster to reach the Top 5 Leaderboard!</li>
+      <li>🔁 Press <strong>R</strong> to reset the maze anytime during the game.</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <p>Made with ❤️ by Pratham Ranjan & Chirag Agarwal | NTCC 2025</p>
+</footer>
+{% endblock %}
+
+{% block scripts %}
+<style>
+  .animated-tagline {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    color: #ccc;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards, glowPulse 3s infinite ease-in-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes glowPulse {
+    0%, 100% {
+      text-shadow: 0 0 5px #a454ff, 0 0 10px #a454ff;
+    }
+    50% {
+      text-shadow: 0 0 15px #a454ff, 0 0 30px #a454ff;
+    }
+  }
+</style>
+
+<script>
+  const mmModal = document.getElementById('mindmaze-modal');
+  const openMMBtn = document.getElementById('open-mm-instructions');
+  const closeMMBtn = document.getElementById('close-mm-modal');
+  openMMBtn?.addEventListener('click', () => mmModal.style.display = 'flex');
+  closeMMBtn?.addEventListener('click', () => mmModal.style.display = 'none');
+
+  const tttModal = document.getElementById('ttt-modal');
+  const openTTTBtn = document.getElementById('open-ttt-instructions');
+  const closeTTTBtn = document.getElementById('close-ttt-modal');
+  openTTTBtn?.addEventListener('click', () => tttModal.style.display = 'flex');
+  closeTTTBtn?.addEventListener('click', () => tttModal.style.display = 'none');
+
+  window.addEventListener('click', (e) => {
+    if (e.target === mmModal) mmModal.style.display = 'none';
+    if (e.target === tttModal) tttModal.style.display = 'none';
+  });
+</script>
+{% endblock %}

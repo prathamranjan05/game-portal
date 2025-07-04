@@ -1,0 +1,310 @@
+/* Base styles */
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+h1, h2 {
+    color: #ffcc00;
+    text-shadow: 1px 1px 3px #000;
+}
+
+/* Button styling */
+button {
+    padding: 10px 25px;
+    margin: 10px;
+    background: linear-gradient(145deg, #4CAF50, #2e7d32);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(145deg, #66bb6a, #388e3c);
+}
+
+/* Start screen */
+#start-screen {
+    margin-top: 50px;
+}
+
+#player-name {
+    padding: 10px;
+    font-size: 16px;
+    width: 250px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+/* Game container layout */
+#game-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+/* Maze board */
+#board {
+    display: grid;
+    gap: 2px;
+}
+
+.cell {
+    width: 40px;
+    height: 40px;
+    background-color: #2a2a2c;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.cell.wall {
+    background-color: #000;
+}
+
+.cell.path {
+    background-color: #bbbbbb;
+}
+
+.cell.player {
+    background-color: #4caf50;
+}
+
+.cell.start-cell {
+    border: 2px solid #00e676;
+}
+
+.cell.end-cell {
+    background-color: #ff2e2e;        /* Bright red */
+    border: 2px solid #ff5e5e;
+    box-shadow: 0 0 8px 3px rgba(255, 46, 46, 0.6);
+    z-index: 2;
+}
+
+
+/* Panels */
+.left-panel {
+    flex-shrink: 0;
+}
+
+.right-panel {
+    text-align: left;
+    min-width: 250px;
+    max-width: 300px;
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+}
+
+/* Timer and controls */
+#timer {
+    font-size: 20px;
+    margin: 10px 0;
+    color: #8ab4f8;
+    font-weight: bold;
+}
+
+/* Controls */
+#controls {
+    margin-top: 15px;
+}
+
+/* Scoreboard */
+#scoreboard {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    color: #ffd700;
+    text-shadow: 0 0 5px #ffd700aa;
+}
+
+#scoreboard li {
+    padding: 5px 0;
+    border-bottom: 1px solid #444;
+    font-size: 15px;
+}
+
+/* Modal styling */
+.modal {
+    position: fixed;
+    display: none;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal-content {
+    background-color: #121212;
+    padding: 30px;
+    border-radius: 15px;
+    color: #f1f1f1;
+    text-align: center;
+    max-width: 90%;
+    width: 400px;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+    position: relative;
+}
+
+.modal-content h2 {
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.modal-content ul {
+    text-align: left;
+    margin-top: 10px;
+}
+
+.modal-content .close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.modal-content .close:hover {
+    color: #fff;
+}
+
+/* Toast */
+#swipe-toast {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #000;
+    padding: 10px 20px;
+    color: #fff;
+    border-radius: 10px;
+    display: none;
+    font-size: 18px;
+    z-index: 1000;
+}
+
+/* Confetti canvas fix */
+canvas {
+    z-index: 9999 !important;
+    pointer-events: none;
+    position: fixed !important;
+}
+/* 🔮 Glowing Animated Background */
+body::before {
+    content: "";
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, #4f46e5 10%, transparent 40%),
+                radial-gradient(circle, #06b6d4 10%, transparent 40%),
+                radial-gradient(circle, #a855f7 10%, transparent 40%);
+    background-repeat: no-repeat;
+    background-size: 50% 50%;
+    animation: glowMove 15s linear infinite;
+    z-index: -1;
+    opacity: 0.2;
+    filter: blur(120px);
+}
+
+@keyframes glowMove {
+    0% {
+        background-position: 0% 0%, 100% 0%, 0% 100%;
+    }
+    50% {
+        background-position: 100% 100%, 0% 100%, 100% 0%;
+    }
+    100% {
+        background-position: 0% 0%, 100% 0%, 0% 100%;
+    }
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+    #game-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .right-panel {
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+.settings-panel {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.settings-btn {
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 12px 14px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.settings-menu {
+  display: none;
+  background: #161b22;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  bottom: 50px;
+  right: 0;
+  width: 220px;
+  color: #e6edf3;
+}
+
+.settings-menu h3 {
+  margin-top: 0;
+}
+
+.settings-menu label {
+  display: block;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+body.light-theme {
+  background: #f0f0f0;
+  color: #111;
+}
+
+body.light-theme .card,
+body.light-theme .modal-content {
+  background: #fff;
+  color: #111;
+}
+/* Light theme fix for scoreboard text */
+body.light-theme #scoreboard {
+    color: #333;
+    text-shadow: none;
+}
+
+body.light-theme #scoreboard li {
+    border-bottom: 1px solid #ccc;
+}

@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Ultimate Tic Tac Toe{% endblock %}
+
+{% block content %}
+<h1>Ultimate Tic Tac Toe</h1>
+
+<!-- Toasts -->
+<div id="ttt-toast" style="display:none;"></div>
+<div id="ttt-toast-error" style="display:none;"></div>
+
+<!-- Mode Toggle -->
+<div id="mode-toggle-container">
+  <label class="switch">
+    <input type="checkbox" id="mode-toggle">
+    <span class="slider"></span>
+  </label>
+  <span id="mode-label">2 Player Mode</span>
+</div>
+
+<!-- Instructions Button -->
+<button id="open-instructions-btn">How to Play</button>
+
+<!-- Instructions Modal -->
+<div id="instructions-modal" class="modal">
+  <div class="modal-content">
+    <span id="close-instructions-btn" class="close">&times;</span>
+    <h2>🎮 How to Play Ultimate Tic Tac Toe</h2>
+<ul>
+  <li>🔲 The board is made up of <strong>9 mini Tic Tac Toe boards</strong> (3x3 grid).</li>
+  <li>❌ You are <strong>Player X</strong>, and you play first. The AI (or 2nd player) is ⭕.</li>
+  <li>➡️ When you play in a mini board, your move decides which board the opponent plays in next.</li>
+  <li>🎯 For example: If you place ❌ in the <strong>top-right cell</strong> of a mini board, your opponent must play in the <strong>top-right board</strong>.</li>
+  <li>🚫 If the target board is already won or full, your opponent can move anywhere.</li>
+  <li>✅ To win a mini board: get 3 in a row (❌ or ⭕).</li>
+  <li>🏆 To win the game: win 3 mini boards in a row (like a giant Tic Tac Toe).</li>
+  <li>🔄 Press <strong>Restart</strong> anytime to reset the game.</li>
+  <li>👥 Use the toggle to switch between:
+    <ul>
+      <li><strong>Player vs AI 🤖</strong> — Challenge the smart computer.</li>
+      <li><strong>2 Player 👥</strong> — Play locally with a friend.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Scoreboard -->
+<div id="scoreboard">
+  <strong>Scoreboard</strong><br>
+  X Wins: <span id="x-wins">0</span> |
+  O Wins: <span id="o-wins">0</span> |
+  Draws: <span id="draws">0</span>
+</div>
+
+<!-- Game Status -->
+<div id="status">Current Player: X</div>
+
+<!-- Game Board -->
+<div id="game-board"></div>
+
+<!-- Controls -->
+<button id="restart-btn">New Game</button>
+<button id="reset-scoreboard-btn">Reset Scoreboard</button>
+
+<!-- Game Over Modal -->
+<div id="ttt-modal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="ttt-close">&times;</span>
+    <h2 id="ttt-result-text">Game Over</h2>
+    <button id="ttt-restart" class="btn">Restart Game</button>
+    <a href="/" class="btn-outline">Back to Home</a>
+  </div>
+</div>
+
+<!-- Back to Home -->
+<a href="/" class="btn" style="margin-top: 20px;">⬅️ Back to Home</a>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script>
+  // Modal logic
+  const instructionsModal = document.getElementById('instructions-modal');
+  document.getElementById('open-instructions-btn').onclick = () => instructionsModal.style.display = 'flex';
+  document.getElementById('close-instructions-btn').onclick = () => instructionsModal.style.display = 'none';
+  window.addEventListener('click', (e) => {
+    if (e.target === instructionsModal) instructionsModal.style.display = 'none';
+  });
+
+  // Game Over Modal close logic
+  const gameOverModal = document.getElementById('ttt-modal');
+  document.getElementById('ttt-close').onclick = () => gameOverModal.style.display = 'none';
+</script>
+{% endblock %}
