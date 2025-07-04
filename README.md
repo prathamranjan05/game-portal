@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="static/portal-thumbnail.jpg" alt="Game Portal Logo" width="300">
+</p>
 # 🎮 Game Portal — NTCC Project  
 _A collaborative project by **Pratham Ranjan** & **Chirag Agarwaal**_
 
