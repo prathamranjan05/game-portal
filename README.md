@@ -83,9 +83,9 @@ python app.py
 Open your browser and visit: http://127.0.0.1:5000
 
 👨‍💻 Developers
-Pratham Ranjan — GitHub
+Pratham Ranjan — https://github.com/prathamranjan05
 
-Chirag Agarwaal — GitHub
+Chirag Agarwal — https://github.com/ChiragAgarwal455
 
 📜 License
 This project is open-source and free to use for educational purposes.
