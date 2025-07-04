@@ -251,3 +251,26 @@ footer a:hover {
     font-size: 1.2rem;
   }
 }
+.floating-portal-icon {
+  position: fixed;
+  top: 25px;
+  left: 25px;
+  width: 70px;
+  height: 70px;
+  border-radius: 12px; /* slight rounding for aesthetic */
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+  z-index: 999;
+  transition: transform 0.3s ease;
+}
+.floating-portal-icon:hover {
+  transform: scale(1.1);
+}
+.floating-portal-icon img {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px; /* match the container's rounding */
+  object-fit: cover; /* ensure the image covers the container */
+}
+.floating-portal-icon:active {
+  transform: scale(0.95);
+}

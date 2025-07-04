@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='style(m).css') }}">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Welcome to the Game Portal! Play Ultimate Tic Tac Toe and Mind Maze. Challenge your friends or the AI in these exciting games.">
   <meta name="keywords" content="Game Portal, Ultimate Tic Tac Toe, Mind Maze, Play Games, Challenge Friends, AI Games">
@@ -67,7 +66,7 @@
       }
     }
 
-    /* ✅ Portal Icon (top-left) */
+    /* Portal Icon (top-left) */
     #portal-icon {
       position: fixed;
       top: 20px;
@@ -79,13 +78,38 @@
       z-index: 1000;
       cursor: pointer;
     }
+
+    /* GitHub and Contact Us Buttons */
+    .bottom-links {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 999;
+      display: flex;
+      gap: 10px;
+    }
+    .bottom-links a {
+      background: #1e1e1e;
+      color: #fff;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+      transition: background 0.3s ease;
+    }
+    .bottom-links a:hover {
+      background: #4CAF50;
+    }
   </style>
 </head>
 <body class="{% if request.path == '/' %}portal-bg{% endif %}" data-home="{{ 'true' if request.path == '/' else 'false' }}">
 
-  <!-- ✅ Portal icon (all pages) -->
+  <!-- Portal icon -->
   <a href="/" title="Back to Home">
-    <img src="{{ url_for('static', filename='images/portal-thumbnail.jpg') }}" alt="Portal Icon" id="portal-icon">
+    <img src="{{ url_for('static', filename='images/portal-thumbnail.jpg') }}"
+         alt="Game Portal Icon"
+         class="floating-portal-icon">
   </a>
 
   {% if request.path == '/' %}
@@ -119,6 +143,12 @@
       <br><br>
       <button onclick="closeSettings()">Close</button>
     </div>
+  </div>
+
+  <!-- GitHub + Contact Us Buttons -->
+  <div class="bottom-links">
+    <a href="https://github.com/prathamranjan05/game-portal" target="_blank" rel="noopener">🐙 GitHub</a>
+    <a href="mailto:prathamranjan2004@gmail.com">📩 Contact Us</a>
   </div>
 
   <script>
