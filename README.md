@@ -1,8 +1,10 @@
+
+# 🎮 Game Portal — NTCC Project  
+_A collaborative project by **Pratham Ranjan** & **Chirag Agarwaal**_
+
 <p align="center">
   <img src="static/images/portal-thumbnail.jpg" alt="Game Portal Logo" width="300">
 </p>
-# 🎮 Game Portal — NTCC Project  
-_A collaborative project by **Pratham Ranjan** & **Chirag Agarwaal**_
 
 Welcome to the **Game Portal**, an interactive web application developed as part of our NTCC project. It features two exciting browser-based games:
 
