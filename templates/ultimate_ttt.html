@@ -77,17 +77,5 @@
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='script.js') }}"></script>
-<script>
-  // Modal logic
-  const instructionsModal = document.getElementById('instructions-modal');
-  document.getElementById('open-instructions-btn').onclick = () => instructionsModal.style.display = 'flex';
-  document.getElementById('close-instructions-btn').onclick = () => instructionsModal.style.display = 'none';
-  window.addEventListener('click', (e) => {
-    if (e.target === instructionsModal) instructionsModal.style.display = 'none';
-  });
 
-  // Game Over Modal close logic
-  const gameOverModal = document.getElementById('ttt-modal');
-  document.getElementById('ttt-close').onclick = () => gameOverModal.style.display = 'none';
-</script>
 {% endblock %}

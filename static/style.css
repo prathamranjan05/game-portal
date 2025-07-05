@@ -50,7 +50,6 @@ h1 {
 }
 
 /* X and O styling */
-/* X and O styling - clean static look */
 .cell.x {
     color: #00ff9d;
     font-size: 28px;
@@ -64,13 +63,13 @@ h1 {
 }
 
 @keyframes pulseX {
-    from { text-shadow: 0 0 3px #00ff9d; }
-    to { text-shadow: 0 0 12px #00ffaa; }
+    0% { box-shadow: 0 0 4px #00ff9d; }
+    100% { box-shadow: 0 0 12px #00ffaa; }
 }
 
 @keyframes pulseO {
-    from { text-shadow: 0 0 3px #ff4d6d; }
-    to { text-shadow: 0 0 12px #ff7d7d; }
+    0% { box-shadow: 0 0 4px #ff4d6d; }
+    100% { box-shadow: 0 0 12px #ff7d7d; }
 }
 
 .cell.locked {
@@ -92,13 +91,15 @@ h1 {
     color: #fff !important;
 }
 
-/* Mini win highlights */
+/* Mini win highlights with glow */
 .mini-win-x {
-    background-color: rgba(76, 175, 80, 0.3);
+    background-color: rgba(0, 255, 157, 0.2);
+    animation: pulseX 1.2s infinite alternate;
 }
 
 .mini-win-o {
-    background-color: rgba(244, 67, 54, 0.3);
+    background-color: rgba(255, 77, 109, 0.2);
+    animation: pulseO 1.2s infinite alternate;
 }
 
 /* Final main board win highlight */
@@ -139,10 +140,11 @@ h1 {
 }
 
 /* Buttons */
-button, .btn, .btn-outline {
+button, .btn, .btn-outline, .back-btn {
     margin: 10px;
     padding: 10px 25px;
     font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -152,7 +154,8 @@ button, .btn, .btn-outline {
 #restart-btn,
 #reset-scoreboard-btn,
 #open-instructions-btn,
-.btn {
+.btn,
+.back-btn {
     background: linear-gradient(145deg, #4CAF50, #2e7d32);
     color: white;
     border: none;
@@ -161,7 +164,8 @@ button, .btn, .btn-outline {
 #restart-btn:hover,
 #reset-scoreboard-btn:hover,
 #open-instructions-btn:hover,
-.btn:hover {
+.btn:hover,
+.back-btn:hover {
     background: linear-gradient(145deg, #66bb6a, #388e3c);
 }
 
@@ -223,13 +227,24 @@ button, .btn, .btn-outline {
     color: white;
 }
 
+/* Toggle container with emoji labels */
+#mode-toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #ffd700;
+    position: relative;
+}
+
 /* Toggle switch */
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 30px;
-    margin-bottom: 10px;
+    width: 64px;
+    height: 34px;
 }
 
 .switch input {
@@ -241,44 +256,34 @@ button, .btn, .btn-outline {
 .slider {
     position: absolute;
     cursor: pointer;
-    background-color: #ccc;
-    transition: 0.4s;
-    border-radius: 30px;
+    background-color: #555;
+    transition: background-color 0.4s ease;
+    border-radius: 34px;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
 }
 
-.slider:before {
-    position: absolute;
+.slider::before {
     content: "";
-    height: 22px;
-    width: 22px;
+    position: absolute;
+    height: 26px;
+    width: 26px;
     left: 4px;
     bottom: 4px;
     background-color: white;
-    transition: 0.4s;
+    transition: transform 0.4s ease;
     border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
 input:checked + .slider {
-    background-color: #4CAF50;
+    background-color: #00c853;
 }
 
-input:checked + .slider:before {
+input:checked + .slider::before {
     transform: translateX(30px);
-}
-
-/* Toggle container */
-#mode-toggle-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 15px;
-    font-size: 16px;
-    color: #ffd700;
 }
 
 /* Confetti canvas fix */
@@ -304,6 +309,7 @@ canvas {
         font-size: 14px;
     }
 }
+
 /* Light Theme Overrides */
 body.light {
     background-color: #fefefe;
@@ -316,21 +322,30 @@ body.light h1 {
 }
 
 body.light #status,
-body.light #scoreboard,
 body.light #mode-toggle-container {
     color: #222;
 }
 
+body.light .slider {
+    background-color: #aaa;
+}
+
+body.light input:checked + .slider {
+    background-color: #4CAF50;
+}
+
 body.light button,
 body.light .btn,
-body.light .btn-outline {
+body.light .btn-outline,
+body.light .back-btn {
     background: linear-gradient(145deg, #dcdcdc, #bbb);
     color: #111;
     border: 1px solid #888;
 }
 
 body.light button:hover,
-body.light .btn:hover {
+body.light .btn:hover,
+body.light .back-btn:hover {
     background: linear-gradient(145deg, #eaeaea, #aaa);
     color: #000;
 }
@@ -351,7 +366,6 @@ body.light .modal-content {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Modal close button */
 body.light .modal-content .close {
     color: #333;
 }
@@ -359,26 +373,53 @@ body.light .modal-content .close {
 body.light .modal-content .close:hover {
     color: #000;
 }
+
+/* Animated Background */
 body::before {
-  content: "";
-  position: fixed;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, #4f46e5 10%, transparent 40%),
-              radial-gradient(circle, #06b6d4 10%, transparent 40%),
-              radial-gradient(circle, #a855f7 10%, transparent 40%);
-  background-repeat: no-repeat;
-  background-size: 50% 50%;
-  animation: glowMove 15s linear infinite;
-  z-index: -1;
-  opacity: 0.2;
-  filter: blur(120px);
+    content: "";
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, #4f46e5 10%, transparent 40%),
+                radial-gradient(circle, #06b6d4 10%, transparent 40%),
+                radial-gradient(circle, #a855f7 10%, transparent 40%);
+    background-repeat: no-repeat;
+    background-size: 50% 50%;
+    animation: glowMove 15s linear infinite;
+    z-index: -1;
+    opacity: 0.2;
+    filter: blur(120px);
 }
 
 @keyframes glowMove {
-  0% { background-position: 0% 0%, 100% 0%, 0% 100%; }
-  50% { background-position: 100% 100%, 0% 100%, 100% 0%; }
-  100% { background-position: 0% 0%, 100% 0%, 0% 100%; }
+    0% { background-position: 0% 0%, 100% 0%, 0% 100%; }
+    50% { background-position: 100% 100%, 0% 100%, 100% 0%; }
+    100% { background-position: 0% 0%, 100% 0%, 0% 100%; }
+}
+
+/* Game over board highlight */
+#game-board.game-over {
+  animation: boardGlowPulse 1.5s ease-in-out infinite alternate;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+  border: 3px solid #ffd700;
+  border-radius: 12px;
+}
+
+@keyframes boardGlowPulse {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    border-color: #ffd700;
+  }
+  100% {
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+    border-color: #ffea00;
+  }
+}
+/* Force gold color on entire scoreboard — labels and values */
+#scoreboard,
+#scoreboard span {
+  color: #daa520 !important; /* goldenrod */
+  font-weight: bold;
 }

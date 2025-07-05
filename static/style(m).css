@@ -206,7 +206,7 @@ canvas {
     pointer-events: none;
     position: fixed !important;
 }
-/* 🔮 Glowing Animated Background */
+/*  Glowing Animated Background */
 body::before {
     content: "";
     position: fixed;
@@ -301,10 +301,28 @@ body.light-theme .modal-content {
 }
 /* Light theme fix for scoreboard text */
 body.light-theme #scoreboard {
-    color: #333;
+    color: #95ff00;
     text-shadow: none;
 }
 
 body.light-theme #scoreboard li {
     border-bottom: 1px solid #ccc;
+}
+body.light-theme .right-panel {
+  background-color: #ffffff !important;
+  color: #111 !important;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Optional: Adjust borders for better visibil/-pity in light mode */
+body.light-theme #scoreboard li {
+  border-bottom: 1px solid #ddd;
+}
+
+body.light-theme #timer {
+  color: #1a73e8; /* A readable blue shade on white */
+}
+body.light-theme button {
+  background: linear-gradient(145deg, #4CAF50, #2e7d32);
+  color: white;
 }

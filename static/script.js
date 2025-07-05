@@ -15,16 +15,61 @@ let firstMoveMade = false;
 if (!localStorage.getItem("ttt-mode")) {
   localStorage.setItem("ttt-mode", "AI");
 }
+
+// ✅ Reflect saved mode in UI
 let isTwoPlayer = localStorage.getItem("ttt-mode") === "2P";
 modeToggle.checked = isTwoPlayer;
-modeLabel.textContent = isTwoPlayer ? "2 Player Mode" : "Vs AI Mode";
+modeLabel.textContent = "2 Player Mode";  // ✅ Always show this text
 
-// Handle toggle
+// ✅ Toggle Handler
 modeToggle.addEventListener("change", () => {
   isTwoPlayer = modeToggle.checked;
-  localStorage.setItem("ttt-mode", isTwoPlayer ? "2P" : "AI");
+  const newMode = isTwoPlayer ? "2P" : "AI";
+  localStorage.setItem("ttt-mode", newMode);
+  modeLabel.textContent = "2 Player Mode";  // ✅ Static label
   showToast(`Mode set to ${isTwoPlayer ? '2 Player' : 'Vs AI'}`);
+  resetGame();
 });
+
+// ✅ Reset game without full reload
+function resetGame() {
+  fetch("/ttt-reset", { method: "POST" })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        gameOver = false;
+        currentPlayer = "X";
+        firstMoveMade = false;
+        boardDiv.innerHTML = "";
+        setupBoard();
+        statusDiv.textContent = isTwoPlayer ? "Player X's turn" : "Your turn (X)";
+        modeToggle.disabled = false;
+        modeToggle.style.opacity = 1;
+        modeLabel.textContent = "2 Player Mode";  // ✅ Reapply static label
+      }
+    });
+}
+
+// ✅ Create board cells dynamically
+function setupBoard() {
+  for (let r = 0; r < 9; r++) {
+    for (let c = 0; c < 9; c++) {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+      cell.dataset.row = r;
+      cell.dataset.col = c;
+      if ((c + 1) % 3 === 0 && c !== 8) cell.classList.add('mini-border-right');
+      if ((r + 1) % 3 === 0 && r !== 8) cell.classList.add('mini-border-bottom');
+      cell.addEventListener('click', () => {
+        if (cell.classList.contains('x') || cell.classList.contains('o') || cell.classList.contains('locked') || gameOver) return;
+        if (!isTwoPlayer && currentPlayer !== "X") return;
+        makeMove(r, c);
+      });
+      boardDiv.appendChild(cell);
+    }
+  }
+}
+setupBoard();
 
 // Instruction modal
 const instructionsModal = document.getElementById('instructions-modal');
@@ -44,24 +89,6 @@ function updateScoreboard() {
 }
 updateScoreboard();
 
-// Render board
-for (let r = 0; r < 9; r++) {
-  for (let c = 0; c < 9; c++) {
-    const cell = document.createElement('div');
-    cell.classList.add('cell');
-    cell.dataset.row = r;
-    cell.dataset.col = c;
-    if ((c + 1) % 3 === 0 && c !== 8) cell.classList.add('mini-border-right');
-    if ((r + 1) % 3 === 0 && r !== 8) cell.classList.add('mini-border-bottom');
-    cell.addEventListener('click', () => {
-      if (cell.classList.contains('x') || cell.classList.contains('o') || cell.classList.contains('locked') || gameOver) return;
-      if (!isTwoPlayer && currentPlayer !== "X") return;
-      makeMove(r, c);
-    });
-    boardDiv.appendChild(cell);
-  }
-}
-
 // Lock toggle after first move
 function lockToggle() {
   modeToggle.disabled = true;
@@ -75,7 +102,7 @@ function showToast(msg) {
   setTimeout(() => { toast.style.display = "none"; }, 2000);
 }
 
-// Game reset
+// Reset buttons
 resetBtn.onclick = () => {
   fetch("/ttt-reset", { method: "POST" })
     .then(res => res.json())
