@@ -3,7 +3,7 @@
 _A collaborative project by **Pratham Ranjan** & **Chirag Agarwaal**_
 
 <p align="center">
-  <img src="static/images/portal-thumbnail.jpg" alt="Game Portal Logo" width="300">
+  <img src="static/images/portal-thumbnail.jpg" alt="Game Portal Logo" width="500">
 </p>
 
 Welcome to the **Game Portal**, an interactive web application developed as part of our NTCC project. It features two exciting browser-based games:
@@ -41,21 +41,26 @@ Built using **Python (Flask)**, **HTML/CSS/JS**, and AI logic, this portal showc
 
 
 ├── app.py
-├── static/
-│ ├── styled.css
-│ ├── style.css
-│ ├── style(m).css
-│ ├── background-music.mp3
-│ └── click-sound.mp3
-├── templates/
-│ ├── base.html
-│ ├── home.html
-│ ├── tictactoe.html
-│ └── mindmaze.html
+├── game_logic.py
 ├── maze_generator.py
 ├── mcts_ai.py
 ├── scoreboard.json
-└── README.md
+├── README.md
+├── static/
+│ ├── images/
+│ │ └── portal-thumbnail.jpg
+│ ├── sounds/
+│ ├── script.js
+│ ├── script(m).js
+│ ├── style.css
+│ ├── style(m).css
+│ └── styled.css
+├── templates/
+│ ├── base.html
+│ ├── home.html
+│ ├── mind_maze.html
+│ └── ultimate_ttt.html
+└── pycache/
 
 
 ---
