@@ -1,4 +1,3 @@
-
 # 🎮 Game Portal — NTCC Project  
 _A collaborative project by **Pratham Ranjan** & **Chirag Agarwaal**_
 
@@ -38,8 +37,6 @@ Built using **Python (Flask)**, **HTML/CSS/JS**, and AI logic, this portal showc
 
 ## 📂 Project Structure
 
-
-
 ├── app.py
 ├── game_logic.py
 ├── maze_generator.py
@@ -62,37 +59,38 @@ Built using **Python (Flask)**, **HTML/CSS/JS**, and AI logic, this portal showc
 │ └── ultimate_ttt.html
 └── pycache/
 
+---
+
+## 🌐 Live Demo
+
+🔗 [View Live Portal](https://gameportal.pythonanywhere.com/)
 
 ---
 
 ## 🧪 How to Run Locally
 
 1. **Clone the repository**
-   ```bash
    git clone https://github.com/prathamranjan05/game-portal.git
    cd game-portal
 
-2. Create a virtual environment
+2. **Create a virtual environment**
+
+   python -m venv venv
+   venv\Scripts\activate  # On Windows
 
 
-python -m venv venv
-venv\Scripts\activate  # On Windows
+3. **Install dependencies**
 
-3. Install dependencies
+   pip install flask
 
-pip install flask
+4. **Run the app**
 
-4. Run the app
-
-python app.py
-Open your browser and visit: http://127.0.0.1:5000
+   python app.py
 
 👨‍💻 Developers
 Pratham Ranjan — https://github.com/prathamranjan05
 
-Chirag Agarwal — https://github.com/ChiragAgarwal455
+Chirag Agarwaal — https://github.com/ChiragAgarwal455
 
 📜 License
 This project is open-source and free to use for educational purposes.
-
-Happy to help!
