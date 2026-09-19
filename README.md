@@ -87,8 +87,6 @@ Built using **Python (Flask)**, **HTML/CSS/JS**, and AI logic, this portal showc
 
    python app.py
 
-👨‍💻 Developers
-Pratham Ranjan — https://github.com/prathamranjan05
 
 📜 License
 This project is open-source and free to use for educational purposes.
