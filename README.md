@@ -90,7 +90,5 @@ Built using **Python (Flask)**, **HTML/CSS/JS**, and AI logic, this portal showc
 👨‍💻 Developers
 Pratham Ranjan — https://github.com/prathamranjan05
 
-Chirag Agarwaal — https://github.com/ChiragAgarwal455
-
 📜 License
 This project is open-source and free to use for educational purposes.
